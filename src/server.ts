@@ -1,13 +1,26 @@
 import express from "express";
 import mongoose from "mongoose";
+import Pusher from "pusher";
 import dotenv from "dotenv";
 import messagesController from "./controllers/MessagesController.js";
+import messagesCollection from "./collections/MessagesCollection.js";
 
 // app config
 const app = express();
 dotenv.config();
 
 const port = process.env.APP_PORT;
+
+// pusher
+const pusherOptions: Pusher.Options = {
+  appId: process.env.PUSHER_APP_ID as string,
+  key: process.env.PUSHER_KEY as string,
+  secret: process.env.PUSHER_SECRET as string,
+  cluster: "eu",
+  encrypted: true,
+};
+
+const pusher = new Pusher(pusherOptions);
 
 // middleware
 app.use(express.json());
@@ -28,8 +41,16 @@ const db_options: mongoose.ConnectionOptions = {
 
 mongoose.connect(db_url, db_options);
 
+const db = mongoose.connection;
+
+db.once("open", () => {
+  console.log("DB Connected");
+
+  messagesCollection(db, pusher);
+});
+
 // controllers
 messagesController(app);
 
 // listen
-app.listen(port, () => console.log(`Listening to port ${port}`));
+app.listen(port, () => console.log(`Listening to port: ${port}`));
