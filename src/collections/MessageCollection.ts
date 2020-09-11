@@ -20,7 +20,9 @@ const MessageCollection = (db: mongoose.Connection, pusher: Pusher) => {
         message: messageDetails.message,
       } as IMessage);
     } else {
-      console.log("Error triggering puhser to send a message");
+      console.log(
+        "Error triggering puhser to send a message or other action was triggered"
+      );
     }
   });
 };

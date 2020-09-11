@@ -7,5 +7,5 @@ const MessageSchema = createSchema({
     room_id: { type: String, required: true },
     timestamp: { type: String, required: true },
 });
-const Message = typedModel("message", MessageSchema);
+const Message = typedModel("messages", MessageSchema);
 export default Message;

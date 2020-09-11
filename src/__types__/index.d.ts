@@ -4,5 +4,5 @@ interface IMessage {
 }
 
 interface IRoom {
-  room_id: string;
+  name: string;
 }

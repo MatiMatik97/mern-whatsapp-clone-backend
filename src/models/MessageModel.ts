@@ -10,6 +10,6 @@ const MessageSchema = createSchema({
   timestamp: { type: String, required: true },
 });
 
-const Message = typedModel("message", MessageSchema);
+const Message = typedModel("messages", MessageSchema);
 
 export default Message;

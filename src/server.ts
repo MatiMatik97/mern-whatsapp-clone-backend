@@ -2,8 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import Pusher from "pusher";
 import dotenv from "dotenv";
-import messagesController from "./controllers/MessagesController.js";
-import messagesCollection from "./collections/MessagesCollection.js";
+import messageController from "./controllers/MessageController.js";
+import messageCollection from "./collections/MessageCollection.js";
 
 // app config
 const app = express();
@@ -52,11 +52,11 @@ const db = mongoose.connection;
 db.once("open", () => {
   console.log("DB Connected");
 
-  messagesCollection(db, pusher);
+  messageCollection(db, pusher);
 });
 
 // controllers
-messagesController(app);
+messageController(app);
 
 // listen
 app.listen(port, () => console.log(`Listening to port: ${port}`));

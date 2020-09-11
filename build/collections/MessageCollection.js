@@ -14,7 +14,7 @@ const MessageCollection = (db, pusher) => {
             });
         }
         else {
-            console.log("Error triggering puhser to send a message");
+            console.log("Error triggering puhser to send a message or other action was triggered");
         }
     });
 };
