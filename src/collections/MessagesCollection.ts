@@ -1,11 +1,6 @@
 import mongoose from "mongoose";
 import Pusher from "pusher";
 
-interface IMessage {
-  name: string;
-  message: string;
-}
-
 const MessageCollection = (db: mongoose.Connection, pusher: Pusher) => {
   const messagesCollection = db.collection("messages");
   const messagesChangeStream = messagesCollection.watch();

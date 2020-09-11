@@ -14,7 +14,8 @@ const MessageController = (app: Express) => {
     try {
       const response = await Message.create(message);
       res.status(201).send(response);
-      console.log("Successfuly sent a message");
+      console.log("Successfuly sent a message:");
+      console.log(response);
     } catch (error) {
       res.status(500).send(error);
       console.log("Error with sending a message:");
@@ -23,10 +24,19 @@ const MessageController = (app: Express) => {
   });
 
   app.get(rest("/sync"), async (req, res) => {
+    const { room_id } = req.query;
+    console.log("Getting messages by room:");
+    console.log(room_id);
+
     try {
       const response = await Message.find();
-      res.status(200).send(response);
-      console.log("Successfuly got messages");
+      const roomMessages = response.filter(
+        (message) => (message.room_id as unknown) === room_id
+      );
+
+      res.status(200).send(roomMessages);
+      console.log("Successfuly got messages:");
+      console.log(roomMessages);
     } catch (error) {
       res.status(500).send(error);
       console.log("Error with syncing messages:");

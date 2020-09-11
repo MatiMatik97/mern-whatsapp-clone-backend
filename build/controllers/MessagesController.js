@@ -19,7 +19,8 @@ const MessageController = (app) => {
         try {
             const response = yield Message.create(message);
             res.status(201).send(response);
-            console.log("Successfuly sent a message");
+            console.log("Successfuly sent a message:");
+            console.log(response);
         }
         catch (error) {
             res.status(500).send(error);
@@ -28,10 +29,15 @@ const MessageController = (app) => {
         }
     }));
     app.get(rest("/sync"), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const { room_id } = req.query;
+        console.log("Getting messages by room:");
+        console.log(room_id);
         try {
             const response = yield Message.find();
-            res.status(200).send(response);
-            console.log("Successfuly got messages");
+            const roomMessages = response.filter((message) => message.room_id === room_id);
+            res.status(200).send(roomMessages);
+            console.log("Successfuly got messages:");
+            console.log(roomMessages);
         }
         catch (error) {
             res.status(500).send(error);

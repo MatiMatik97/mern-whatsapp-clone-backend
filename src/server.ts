@@ -25,6 +25,12 @@ const pusher = new Pusher(pusherOptions);
 // middleware
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  next();
+});
+
 // db config
 const db_username = process.env.DB_USERNAME;
 const db_passowrd = process.env.DB_PASSOWRD;
