@@ -1,11 +1,13 @@
-// imports
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import messagesController from "./controllers/MessagesController.js";
 // app config
 const app = express();
 dotenv.config();
 const port = process.env.APP_PORT;
+// middleware
+app.use(express.json());
 // db config
 const db_username = process.env.DB_USERNAME;
 const db_passowrd = process.env.DB_PASSOWRD;
@@ -18,7 +20,7 @@ const db_options = {
     useUnifiedTopology: true,
 };
 mongoose.connect(db_url, db_options);
-// api routes
-app.get("/", (req, res) => res.status(200).send("Hello World!"));
+// controllers
+messagesController(app);
 // listen
-app.listen(port, () => console.log(`Listening to ${port}`));
+app.listen(port, () => console.log(`Listening to port ${port}`));
