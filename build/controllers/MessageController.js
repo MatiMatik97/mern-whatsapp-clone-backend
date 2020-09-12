@@ -13,7 +13,8 @@ const MessageController = (app) => {
         return "/api/messages" + url;
     };
     app.post(rest("/send"), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        const message = req.body;
+        const body = req.body;
+        const message = Object.assign(Object.assign({}, body), { timestamp: Date.now() });
         console.log("Sending a message:");
         console.log(message);
         try {
@@ -33,11 +34,10 @@ const MessageController = (app) => {
         console.log("Getting messages by room:");
         console.log(room_id);
         try {
-            const response = yield Message.find();
-            const roomMessages = response.filter((message) => message.room_id === room_id);
-            res.status(200).send(roomMessages);
+            const response = yield Message.find({ room_id: room_id });
+            res.status(200).send(response);
             console.log("Successfuly got messages:");
-            console.log(roomMessages);
+            console.log(response);
         }
         catch (error) {
             res.status(500).send(error);

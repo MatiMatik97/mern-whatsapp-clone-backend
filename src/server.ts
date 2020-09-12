@@ -4,6 +4,8 @@ import Pusher from "pusher";
 import dotenv from "dotenv";
 import messageController from "./controllers/MessageController.js";
 import messageCollection from "./collections/MessageCollection.js";
+import roomController from "./controllers/RoomController.js";
+import roomCollection from "./collections/RoomCollection.js";
 
 // app config
 const app = express();
@@ -53,10 +55,12 @@ db.once("open", () => {
   console.log("DB Connected");
 
   messageCollection(db, pusher);
+  roomCollection(db, pusher);
 });
 
 // controllers
 messageController(app);
+roomController(app);
 
 // listen
 app.listen(port, () => console.log(`Listening to port: ${port}`));

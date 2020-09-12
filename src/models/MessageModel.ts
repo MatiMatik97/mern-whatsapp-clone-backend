@@ -1,8 +1,14 @@
-import tsMongoose from "ts-mongoose";
+import mongoose from "mongoose";
 
-const { createSchema, typedModel } = tsMongoose;
+interface IMessageSchema extends mongoose.Document {
+  name: string;
+  users: string;
+  user_id: string;
+  room_id: string;
+  timestamp: string;
+}
 
-const MessageSchema = createSchema({
+const MessageSchema = new mongoose.Schema({
   name: { type: String, required: true },
   message: { type: String, required: true },
   user_id: { type: String, required: true },
@@ -10,6 +16,9 @@ const MessageSchema = createSchema({
   timestamp: { type: String, required: true },
 });
 
-const Message = typedModel("messages", MessageSchema);
+const Message: mongoose.Model<IMessageSchema> = mongoose.model(
+  "messages",
+  MessageSchema
+);
 
 export default Message;

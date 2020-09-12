@@ -1,8 +1,8 @@
 const MessageCollection = (db, pusher) => {
-    const messagesCollection = db.collection("messages");
-    const messagesChangeStream = messagesCollection.watch();
-    messagesChangeStream.on("change", (change) => {
-        console.log("Messages change stream:");
+    const messageCollection = db.collection("messages");
+    const messageChangeStream = messageCollection.watch();
+    messageChangeStream.on("change", (change) => {
+        console.log("Message change stream:");
         console.log(change);
         if (change.operationType === "insert") {
             const messageDetails = change.fullDocument;
@@ -14,7 +14,7 @@ const MessageCollection = (db, pusher) => {
             });
         }
         else {
-            console.log("Error triggering puhser to send a message or other action was triggered");
+            console.log("Error triggering puhser or other action was triggered");
         }
     });
 };

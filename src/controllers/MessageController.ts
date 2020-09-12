@@ -7,7 +7,8 @@ const MessageController = (app: Express) => {
   };
 
   app.post(rest("/send"), async (req, res) => {
-    const message = req.body;
+    const body = req.body;
+    const message = { ...body, timestamp: Date.now() };
     console.log("Sending a message:");
     console.log(message);
 
@@ -29,14 +30,11 @@ const MessageController = (app: Express) => {
     console.log(room_id);
 
     try {
-      const response = await Message.find();
-      const roomMessages = response.filter(
-        (message) => (message.room_id as unknown) === room_id
-      );
+      const response = await Message.find({ room_id: room_id as string });
 
-      res.status(200).send(roomMessages);
+      res.status(200).send(response);
       console.log("Successfuly got messages:");
-      console.log(roomMessages);
+      console.log(response);
     } catch (error) {
       res.status(500).send(error);
       console.log("Error with syncing messages:");
