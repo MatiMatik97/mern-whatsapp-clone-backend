@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import Pusher from "pusher";
+import cors from 'cors';
 import dotenv from "dotenv";
 import messageController from "./controllers/MessageController.js";
 import messageCollection from "./collections/MessageCollection.js";
@@ -26,12 +27,7 @@ const pusher = new Pusher(pusherOptions);
 
 // middleware
 app.use(express.json());
-
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "*");
-  next();
-});
+app.use(cors());
 
 // db config
 const db_username = process.env.DB_USERNAME;

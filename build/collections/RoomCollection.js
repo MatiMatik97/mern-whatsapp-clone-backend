@@ -9,15 +9,21 @@ const RoomCollection = (db, pusher) => {
             console.log("Room details:");
             console.log(roomDetails);
             pusher.trigger("rooms", "inserted", {
+                _id: roomDetails._id,
                 name: roomDetails.name,
+                users: roomDetails.users,
+                image: roomDetails.image,
             });
         }
         else if (change.operationType === "update") {
-            const roomDetails = change.documentKey._id;
+            const documentDetails = change.documentKey._id;
+            const roomDetails = change.updateDescription
+                .updatedFields;
             console.log("Room details:");
             console.log(roomDetails);
             pusher.trigger("rooms", "updated", {
-                id: roomDetails,
+                _id: documentDetails._id,
+                users: roomDetails.users,
             });
         }
         else {

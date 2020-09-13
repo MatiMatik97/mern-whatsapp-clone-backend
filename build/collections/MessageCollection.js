@@ -9,8 +9,12 @@ const MessageCollection = (db, pusher) => {
             console.log("Message details:");
             console.log(messageDetails);
             pusher.trigger("messages", "inserted", {
+                _id: messageDetails._id,
                 name: messageDetails.name,
                 message: messageDetails.message,
+                user_id: messageDetails.user_id,
+                room_id: messageDetails.room_id,
+                timestamp: messageDetails.timestamp,
             });
         }
         else {
