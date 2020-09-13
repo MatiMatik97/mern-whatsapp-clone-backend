@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import Pusher from "pusher";
-import cors from 'cors';
+import cors from "cors";
 import dotenv from "dotenv";
 import messageController from "./controllers/MessageController.js";
 import messageCollection from "./collections/MessageCollection.js";
@@ -16,9 +16,9 @@ const port = process.env.APP_PORT;
 
 // pusher
 const pusherOptions: Pusher.Options = {
-  appId: process.env.PUSHER_APP_ID as string,
-  key: process.env.PUSHER_KEY as string,
-  secret: process.env.PUSHER_SECRET as string,
+  appId: "1071422",
+  key: "cde362d7c383a6381e2f",
+  secret: "215c404fa6f3c534fb1a",
   cluster: "eu",
   encrypted: true,
 };
