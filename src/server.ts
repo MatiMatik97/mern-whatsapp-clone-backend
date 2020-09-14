@@ -12,7 +12,7 @@ import roomCollection from "./collections/RoomCollection.js";
 const app = express();
 dotenv.config();
 
-const port = process.env.APP_PORT;
+const port = process.env.PORT || 3000;
 
 // pusher
 const pusherOptions: Pusher.Options = {

@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import Pusher from "pusher";
-import cors from 'cors';
+import cors from "cors";
 import dotenv from "dotenv";
 import messageController from "./controllers/MessageController.js";
 import messageCollection from "./collections/MessageCollection.js";
@@ -10,12 +10,12 @@ import roomCollection from "./collections/RoomCollection.js";
 // app config
 const app = express();
 dotenv.config();
-const port = process.env.APP_PORT;
+const port = process.env.PORT || 3000;
 // pusher
 const pusherOptions = {
-    appId: process.env.PUSHER_APP_ID,
-    key: process.env.PUSHER_KEY,
-    secret: process.env.PUSHER_SECRET,
+    appId: "1071422",
+    key: "cde362d7c383a6381e2f",
+    secret: "215c404fa6f3c534fb1a",
     cluster: "eu",
     encrypted: true,
 };
