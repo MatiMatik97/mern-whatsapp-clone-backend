@@ -27,7 +27,10 @@ const pusher = new Pusher(pusherOptions);
 
 // middleware
 app.use(express.json());
-app.use(cors({ origin: true }));
+app.use(cors({
+  origin: '*',
+  optionsSuccessStatus: 200,
+}));
 
 // db config
 const db_username = process.env.DB_USERNAME;
